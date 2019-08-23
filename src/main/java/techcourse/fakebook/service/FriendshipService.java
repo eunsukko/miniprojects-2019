@@ -50,4 +50,11 @@ public class FriendshipService {
 
         return Friendship.from(user, friend);
     }
+
+    public boolean hasFriendship(Long userId, Long friendId) {
+        return friendshipRepository.findByPrecedentUserIdAndUserId(
+                Math.min(userId, friendId),
+                Math.max(userId, friendId))
+                .isPresent();
+    }
 }
